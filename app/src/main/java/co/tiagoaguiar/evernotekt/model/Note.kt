@@ -3,6 +3,7 @@ package co.tiagoaguiar.evernotekt.model
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 
 /**
  *
@@ -16,6 +17,9 @@ data class Note(
     var date: String? = null,
     var body: String? = null
 ) {
+
+    @Inject constructor() : this(0, "instância injetada via dagger")
+
     val createdDate: String
     get() {
         val locale = Locale("pt", "BR")

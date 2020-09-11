@@ -10,8 +10,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import co.tiagoaguiar.evernotekt.model.DaggerUserComponent
 import co.tiagoaguiar.evernotekt.model.Note
 import co.tiagoaguiar.evernotekt.model.RemoteDataSource
+import co.tiagoaguiar.evernotekt.model.User
 import com.google.android.material.navigation.NavigationView
 import io.reactivex.Observable
 import io.reactivex.Observer
@@ -66,6 +68,13 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onStart() {
         super.onStart()
         getAllNotes()
+
+        val component = DaggerUserComponent.builder()
+            .build()
+
+        val user = component.getUser()
+
+        dataSource.createNoteFromUser(user)
     }
 
     override fun onStop() {
