@@ -1,6 +1,9 @@
 package co.tiagoaguiar.evernotekt.model
 
 import co.tiagoaguiar.evernotekt.network.RetrofitClient
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import retrofit2.Callback
 
 /**
@@ -10,22 +13,24 @@ import retrofit2.Callback
  */
 class RemoteDataSource {
 
-    fun listNotes(callback: Callback<List<Note>>) {
+    fun listNotes(): Observable<List<Note>> =
         RetrofitClient.evernoteApi
             .listNotes()
-            .enqueue(callback)
-    }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
 
-    fun getNote(noteId: Int, callback: Callback<Note>) {
+
+    fun getNote(noteId: Int): Observable<Note> =
         RetrofitClient.evernoteApi
             .getNote(noteId)
-            .enqueue(callback)
-    }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
 
-    fun createNote(note: Note, callback: Callback<Note>) {
+
+    fun createNote(note: Note): Observable<Note> =
         RetrofitClient.evernoteApi
             .createNote(note)
-            .enqueue(callback)
-    }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
 
 }
