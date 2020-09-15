@@ -18,8 +18,6 @@ data class Note(
     var body: String? = null
 ) {
 
-    @Inject constructor() : this(0, "instância injetada via dagger")
-
     val createdDate: String
     get() {
         val locale = Locale("pt", "BR")
