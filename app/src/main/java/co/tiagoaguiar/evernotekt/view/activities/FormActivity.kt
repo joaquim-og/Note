@@ -1,4 +1,4 @@
-package co.tiagoaguiar.evernotekt.add.presentation
+package co.tiagoaguiar.evernotekt.view.activities
 
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
@@ -12,8 +12,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import co.tiagoaguiar.evernotekt.R
 import co.tiagoaguiar.evernotekt.add.add
-import co.tiagoaguiar.evernotekt.model.Note
-import co.tiagoaguiar.evernotekt.model.RemoteDataSource
+import co.tiagoaguiar.evernotekt.add.presentation.AddPresenter
+import co.tiagoaguiar.evernotekt.data.model.Note
+import co.tiagoaguiar.evernotekt.data.model.RemoteDataSource
 import kotlinx.android.synthetic.main.activity_form.*
 import kotlinx.android.synthetic.main.content_form.*
 

@@ -2,10 +2,8 @@ package co.tiagoaguiar.evernotekt
 
 import co.tiagoaguiar.evernotekt.add.add
 import co.tiagoaguiar.evernotekt.add.presentation.AddPresenter
-import co.tiagoaguiar.evernotekt.home.Home
-import co.tiagoaguiar.evernotekt.home.presentation.HomePresenter
-import co.tiagoaguiar.evernotekt.model.Note
-import co.tiagoaguiar.evernotekt.model.RemoteDataSource
+import co.tiagoaguiar.evernotekt.data.model.Note
+import co.tiagoaguiar.evernotekt.data.model.RemoteDataSource
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.anyOrNull
 import io.reactivex.Observable

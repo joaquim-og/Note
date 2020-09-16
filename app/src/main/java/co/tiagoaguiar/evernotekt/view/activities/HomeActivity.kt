@@ -1,4 +1,4 @@
-package co.tiagoaguiar.evernotekt.home.presentation
+package co.tiagoaguiar.evernotekt.view.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,13 +8,14 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import co.tiagoaguiar.evernotekt.add.presentation.FormActivity
 import co.tiagoaguiar.evernotekt.R
-import co.tiagoaguiar.evernotekt.home.Home
-import co.tiagoaguiar.evernotekt.model.Note
-import co.tiagoaguiar.evernotekt.model.RemoteDataSource
+import co.tiagoaguiar.evernotekt.view.adapters.NoteAdapter
+import co.tiagoaguiar.evernotekt.data.model.Note
+import co.tiagoaguiar.evernotekt.viewmodel.HomeViewModel
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_home.*
@@ -22,23 +23,20 @@ import kotlinx.android.synthetic.main.content_home.*
 
 
 class HomeActivity : AppCompatActivity(),
-    NavigationView.OnNavigationItemSelectedListener,
-    Home.View {
+    NavigationView.OnNavigationItemSelectedListener {
 
-    private lateinit var homePresenter: HomePresenter
+//    private lateinit var homePresenter: HomePresenter
+    private lateinit var viewModel: HomeViewModel
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        setupPresenter()
+        viewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
         setupViews()
     }
 
-    private fun setupPresenter() {
-        val dataSource = RemoteDataSource()
-        homePresenter = HomePresenter(this, dataSource)
-    }
 
     private fun setupViews() {
         setSupportActionBar(toolbar)
@@ -66,12 +64,22 @@ class HomeActivity : AppCompatActivity(),
 
     override fun onStart() {
         super.onStart()
-        homePresenter.getAllNotes()
+        observeAllNotes()
+    }
+
+    private fun observeAllNotes() {
+        viewModel.getAllNotes().observe(this, Observer { notes ->
+            if (notes == null) {
+                displayError("Erro ao carregar Notas")
+            } else {
+                displayNotes(notes)
+            }
+        })
     }
 
     override fun onStop() {
         super.onStop()
-        homePresenter.stop()
+//        homePresenter.stop()
     }
 
     override fun onBackPressed() {
@@ -105,7 +113,7 @@ class HomeActivity : AppCompatActivity(),
         return true
     }
 
-    override fun displayError(message: String) {
+    fun displayError(message: String) {
         showToast(message)
     }
 
@@ -113,11 +121,11 @@ class HomeActivity : AppCompatActivity(),
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 
-    override fun displayEmptyNotes() {
+     fun displayEmptyNotes() {
 
     }
 
-    override fun displayNotes(notes: List<Note>) {
+    fun displayNotes(notes: List<Note>) {
         // progress
         home_recycler_view.adapter = NoteAdapter(notes) { note ->
             val intent = Intent(baseContext, FormActivity::class.java)
