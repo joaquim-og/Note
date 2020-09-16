@@ -1,9 +1,8 @@
-package co.tiagoaguiar.evernotekt.model
+package co.tiagoaguiar.evernotekt.data.model
 
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
-import javax.inject.Inject
 
 /**
  *

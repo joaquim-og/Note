@@ -2,8 +2,8 @@ package co.tiagoaguiar.evernotekt.home.presentation
 
 import co.tiagoaguiar.evernotekt.home.Home
 import  io.reactivex.Observable
-import co.tiagoaguiar.evernotekt.model.Note
-import co.tiagoaguiar.evernotekt.model.RemoteDataSource
+import co.tiagoaguiar.evernotekt.data.model.Note
+import co.tiagoaguiar.evernotekt.data.model.RemoteDataSource
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableObserver
@@ -45,13 +45,6 @@ class HomePresenter(
     get() = dataSource.listNotes()
 
     override fun getAllNotes() {
-
-        val disposable = notesObservable
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeWith(notesObserver)
-
-        compositeDisposable.add(disposable)
 
     }
 

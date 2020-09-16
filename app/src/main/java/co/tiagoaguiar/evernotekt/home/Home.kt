@@ -1,6 +1,6 @@
 package co.tiagoaguiar.evernotekt.home
 
-import co.tiagoaguiar.evernotekt.model.Note
+import co.tiagoaguiar.evernotekt.data.model.Note
 
 interface Home {
 

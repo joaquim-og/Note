@@ -2,8 +2,8 @@ package co.tiagoaguiar.evernotekt
 
 import co.tiagoaguiar.evernotekt.home.Home
 import co.tiagoaguiar.evernotekt.home.presentation.HomePresenter
-import co.tiagoaguiar.evernotekt.model.Note
-import co.tiagoaguiar.evernotekt.model.RemoteDataSource
+import co.tiagoaguiar.evernotekt.data.model.Note
+import co.tiagoaguiar.evernotekt.data.model.RemoteDataSource
 import io.reactivex.Observable
 import org.junit.Before
 import org.junit.Rule
